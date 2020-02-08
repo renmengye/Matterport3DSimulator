@@ -11,14 +11,14 @@ import cv2
 import numpy as np
 from multiprocessing import Pool
 from numpy.linalg import inv,norm
-from io import StringIO
+from six import StringIO
 
 
 # Parameters
 DOWNSIZED_WIDTH = 512
 DOWNSIZED_HEIGHT = 512
 NUM_WORKER_PROCESSES = 20
-FILL_HOLES = True
+FILL_HOLES = False
 VISUALIZE_OUTPUT = False
 
 if FILL_HOLES:

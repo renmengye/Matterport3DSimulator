@@ -67,5 +67,8 @@ if __name__ == '__main__':
 
   with open('connectivity/scans.txt') as f:
     scans = [scan.strip() for scan in f.readlines()]
-    p = Pool(NUM_WORKER_PROCESSES)
-    p.map(downsizeWithMerge, scans)
+    # p = Pool(NUM_WORKER_PROCESSES)
+    print(scans)
+    # p.map(downsizeWithMerge, scans)
+    for s in scans:
+        downsizeWithMerge(s)

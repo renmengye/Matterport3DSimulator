@@ -1,4 +1,6 @@
-
+# import sys
+# sys.path.append('build')
+# print(sys.path)
 import MatterSim
 import time
 import math
@@ -21,7 +23,8 @@ sim.setDepthEnabled(False) # Turn on depth only after running ./scripts/depth_to
 sim.initialize()
 #sim.newEpisode(['2t7WUuJeko7'], ['1e6b606b44df4a6086c0f97e826d4d15'], [0], [0])
 #sim.newEpisode(['1LXtFkjw3qL'], ['0b22fa63d0f54a529c525afbf2e8bb25'], [0], [0])
-sim.newRandomEpisode(['1LXtFkjw3qL'])
+# sim.newRandomEpisode(['1LXtFkjw3qL'])
+sim.newRandomEpisode(['17DRP5sb8fy'])
 
 heading = 0
 elevation = 0
