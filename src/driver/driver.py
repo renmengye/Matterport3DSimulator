@@ -19,22 +19,40 @@ cv2.namedWindow('Python Depth')
 sim = MatterSim.Simulator()
 sim.setCameraResolution(WIDTH, HEIGHT)
 sim.setCameraVFOV(VFOV)
-sim.setDepthEnabled(False) # Turn on depth only after running ./scripts/depth_to_skybox.py (see README.md)
+# sim.setDepthEnabled(False) # Turn on depth only after running ./scripts/depth_to_skybox.py (see README.md)
+sim.setDepthEnabled(True) # Turn on depth only after running ./scripts/depth_to_skybox.py (see README.md)
 sim.initialize()
 #sim.newEpisode(['2t7WUuJeko7'], ['1e6b606b44df4a6086c0f97e826d4d15'], [0], [0])
 #sim.newEpisode(['1LXtFkjw3qL'], ['0b22fa63d0f54a529c525afbf2e8bb25'], [0], [0])
 # sim.newRandomEpisode(['1LXtFkjw3qL'])
-sim.newRandomEpisode(['17DRP5sb8fy'])
+# sim.newRandomEpisode(['17DRP5sb8fy'])
+sim.newEpisode(['17DRP5sb8fy'],
+        ['00ebbf3782c64d74aaf7dd39cd561175'], [0], [0])
 
 heading = 0
 elevation = 0
 location = 0
 ANGLEDELTA = 5 * math.pi / 180
 
-print('\nPython Demo')
-print('Use arrow keys to move the camera.')
-print('Use number keys (not numpad) to move to nearby viewpoints indicated in the RGB view.')
-print('Depth outputs are turned off by default - check driver.py:L20 to enable.\n')
+# print('\nPython Demo')
+# print('Use arrow keys to move the camera.')
+# print('Use number keys (not numpad) to move to nearby viewpoints indicated in the RGB view.')
+# print('Depth outputs are turned off by default - check driver.py:L20 to enable.\n')
+sim.makeAction([location], [heading], [elevation])
+location = 0
+heading = 0
+elevation = 0
+
+state = sim.getState()[0]
+locations = state.navigableLocations
+rgb = np.array(state.rgb, copy=False)
+print(rgb, rgb.shape, rgb.dtype)
+cv2.imwrite('test.png', rgb)
+print(state.location.x, state.location.y, state.location.z)
+print(state.heading)
+print(state.elevation)
+# import pdb; pdb.set_trace()
+print('hey')
 
 while True:
     sim.makeAction([location], [heading], [elevation])
@@ -45,6 +63,11 @@ while True:
     state = sim.getState()[0]
     locations = state.navigableLocations
     rgb = np.array(state.rgb, copy=False)
+    print(rgb, rgb.shape, rgb.dtype)
+    # cv2.imwrite('test.png', rgb)
+    import pdb; pdb.set_trace()
+    print('hey')
+    # assert False
     for idx, loc in enumerate(locations[1:]):
         # Draw actions on the screen
         fontScale = 3.0/loc.rel_distance

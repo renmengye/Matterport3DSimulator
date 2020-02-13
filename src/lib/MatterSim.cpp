@@ -162,6 +162,7 @@ void Simulator::initialize() {
         states.push_back(std::make_shared<SimState>());
         states.back()->rgb = cv::Mat(height, width, CV_8UC3, cv::Scalar(0, 0, 0));
         states.back()->depth = cv::Mat(height, width, CV_16UC1, cv::Scalar(0));
+        states.back()->seg = cv::Mat(height, width, CV_16UC1, cv::Scalar(0));
     }
     if (renderingEnabled) {
 #ifdef OSMESA_RENDERING

@@ -33,9 +33,9 @@ namespace mattersim {
 
     struct Viewpoint: std::enable_shared_from_this<Viewpoint> {
         Viewpoint(std::string viewpointId, unsigned int ix, double x, double y, double z,
-          double rel_heading, double rel_elevation, double rel_distance) : 
+          double rel_heading, double rel_elevation, double rel_distance) :
             viewpointId(viewpointId), ix(ix), x(x), y(y), z(z), rel_heading(rel_heading),
-            rel_elevation(rel_elevation), rel_distance(rel_distance)  
+            rel_elevation(rel_elevation), rel_distance(rel_distance)
         {}
 
         //! Viewpoint identifier
@@ -74,6 +74,8 @@ namespace mattersim {
         cv::Mat rgb;
         //! Depth image taken from the agent's current viewpoint
         cv::Mat depth;
+        //! Object segmentation
+        cv::Mat seg;
         //! Agent's current 3D location
         ViewpointPtr location;
         //! Agent's current camera heading in radians
@@ -147,9 +149,9 @@ namespace mattersim {
 
         /**
          * Enable or disable restricted navigation. When enabled, the navigable locations
-         * that the agent can move to are restricted to nearby viewpoints that are in 
-         * the camera field of view given the current heading. When disabled, the agent 
-         * can always move to any adjacent viewpoint in the navigation graph. 
+         * that the agent can move to are restricted to nearby viewpoints that are in
+         * the camera field of view given the current heading. When disabled, the agent
+         * can always move to any adjacent viewpoint in the navigation graph.
          * Default is true (enabled).
          */
         void setRestrictedNavigation(bool value);
@@ -200,7 +202,7 @@ namespace mattersim {
 
         /**
          * Starts a new episode at a random viewpoint.
-         * @param scanId - sets which scene is used, e.g. "2t7WUuJeko7" 
+         * @param scanId - sets which scene is used, e.g. "2t7WUuJeko7"
          */
         void newRandomEpisode(const std::vector<std::string>& scanId);
 
@@ -219,7 +221,7 @@ namespace mattersim {
          * @param elevation - desired elevation change in radians, measured from the horizon defined
          *                    by the x-y plane (up is positive).
          */
-        void makeAction(const std::vector<unsigned int>& index, const std::vector<double>& heading, 
+        void makeAction(const std::vector<unsigned int>& index, const std::vector<double>& heading,
                         const std::vector<double>& elevation);
 
         /**
@@ -235,7 +237,7 @@ namespace mattersim {
         /**
          * Return a formatted timing string.
          */
-        std::string timingInfo(); 
+        std::string timingInfo();
 
     private:
         const int headingCount = 12; // 12 heading values in discretized views

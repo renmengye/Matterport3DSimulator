@@ -62,6 +62,7 @@ PYBIND11_MODULE(MatterSim, m) {
         .def_readonly("step", &SimState::step)
         .def_readonly("rgb", &SimState::rgb)
         .def_readonly("depth", &SimState::depth)
+        .def_readonly("seg", &SimState::seg)
         .def_readonly("location", &SimState::location)
         .def_readonly("heading", &SimState::heading)
         .def_readonly("elevation", &SimState::elevation)
